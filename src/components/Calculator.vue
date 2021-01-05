@@ -15,7 +15,7 @@
                     <b-button
                     :class="{'active-opreator': operator === '+'}"
                      variant="warning" 
-                     @click="operator='+'">+</b-button>
+                     @click="updateOpreator('+')">+</b-button>
             </b-row>
             <b-row class="no-gutters">
                     <b-button @click="appendCharacter(4)">4</b-button>
@@ -24,7 +24,7 @@
                     <b-button
                     :class="{'active-opreator': operator === '-'}"
                     variant="warning" 
-                    @click="operator='-'">-</b-button>
+                    @click="updateOpreator('-')">-</b-button>
             </b-row>
             <b-row class="no-gutters">
                     <b-button @click="appendCharacter(7)">7</b-button>
@@ -33,7 +33,7 @@
                     <b-button 
                     :class="{'active-opreator': operator === '*'}"
                     variant="warning" 
-                    @click="operator='*'">x</b-button>
+                    @click="updateOpreator('*')">x</b-button>
             </b-row>
             <b-row class="no-gutters">
                     <b-button @click="appendCharacter(0)">0</b-button>
@@ -42,7 +42,7 @@
                     <b-button 
                     :class="{'active-opreator': operator === '/'}"
                     variant="warning" 
-                    @click="operator='/'">/</b-button>
+                    @click="updateOpreator('/')">/</b-button>
             </b-row>
         </div>
   </b-card>
@@ -65,6 +65,12 @@ export default {
             this.firstOperand = evaluate(firstOperand + operator + secondOperand).toString()
             this.secondOperand = ''
             this.operator = ''
+        },
+        updateOpreator(op){
+        if(this.operator){
+            this.eval()
+          }
+        this.opreator = op
         },
         appendCharacter(char){
             let currentOperand = this.operator ? 'secondOperand' : (
